@@ -1,0 +1,93 @@
+﻿<Window x:Class="mp3_soitin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mp3_soitin"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MP3 Player" Height="450" Width="650" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent">
+    <Grid>
+        <Border Background="Beige" CornerRadius="20" BorderThickness="2, 0, 2, 2" BorderBrush="LightGray">
+            <Grid>
+                <Border Background="AliceBlue" Margin="350,82,40,39" CornerRadius="25"/>
+                <ListBox x:Name="PlaylistBox" Background="Transparent" Margin="350,69,40,39" SelectionChanged="PlaylistBox_SelectionChanged" BorderThickness="0" Height="315">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding SongName}" Height="35" FontSize="16" TextAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Label x:Name="EmptyPlaylistLabel" Content="The playlist is empty" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Visible" Margin="408,192,84,162" FontSize="16" />
+                <ComboBox x:Name="PlaylistComboBox" HorizontalAlignment="Left" Margin="353,48,0,0" VerticalAlignment="Top" Width="174" ItemsSource="{Binding playlists}" DisplayMemberPath="Name" SelectionChanged="PlaylistComboBox_SelectionChanged" FontSize="14" Height="32"/>
+
+            </Grid>
+        </Border>
+        <Border Grid.Row="0" Background="LightGray" CornerRadius="19, 19, 0, 0" Height="40" VerticalAlignment="Top" MouseLeftButtonDown="DragWindow">
+            <Grid>
+
+                <TextBlock Text="MP3 Player" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                <Button x:Name="QuitButton" HorizontalAlignment="Left" Margin="586,0,0,0" VerticalAlignment="Center" Height="32" Width="36" Click="Button_Click_Quit">
+                    <materialDesign:PackIcon Kind="ExitRun"/>
+                </Button>
+
+                <Button HorizontalAlignment="Left" Margin="528,0,0,0" VerticalAlignment="Center" Height="32" Width="36" Click="Button_Click_Minimize">
+                    <materialDesign:PackIcon Kind="Minimize"/>
+                </Button>
+
+            </Grid>
+        </Border>
+        <Grid>
+            <TextBlock x:Name="TrackTitlebox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,267,0,0" FontSize="16" Text="Track not selected" TextAlignment="Center" TextWrapping="Wrap" Height="65" Width="188"/>
+
+            <Button x:Name="LoopButton" HorizontalAlignment="Left" Margin="50,366,0,0" VerticalAlignment="Top" Height="40" Width="40" Click="LoopButton_Click">
+                <materialDesign:PackIcon Kind="RepeatOff" x:Name="LoopButtonIcon" Width="25" Height="25"/>
+                <Button.ToolTip>
+                    <ToolTip Content="Looping disabled"/>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="PreviousButton" Height="40" Margin="90,366,470,44" Width="40" Background="Transparent" BorderThickness="5,5,5,5" Click="Previous_Button_Click">
+                <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                <Button.ToolTip>
+                    <ToolTip Content="Previous"/>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="NextButton" Height="40" Width="40" Background="Transparent" BorderThickness="5,5,5,5" Margin="238,366,322,44" Click="Next_Button_Click">
+                <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
+                <Button.ToolTip>
+                    <ToolTip Content="Next"/>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="PlayPauseButton" Height="40" Width="40" Background="Transparent" BorderThickness="5,5,5,5" Margin="189,366,421,44" Click="Play_Pause_Button_Click">
+                <materialDesign:PackIcon x:Name="PlayPauseIcon" Kind="Pause" Width="25" Height="25" />
+                <Button.ToolTip>
+                    <ToolTip Content="Pause"/>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="newplaylist" HorizontalAlignment="Left" Margin="535,50,0,0"  BorderThickness="2,2,2,2" VerticalAlignment="Top" Click="Newplaylist_Click" Height="28" Width="28">
+                <materialDesign:PackIcon Kind="PlusBold"/>
+                <Button.ToolTip>
+                    <ToolTip Content="New playlist"/>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="RemovePlaylist" HorizontalAlignment="Left" Margin="569,50,0,0" VerticalAlignment="Top" Width="28" Height="28" BorderThickness="2,2,2,2" Click="RemovePlaylist_Click">
+                <materialDesign:PackIcon Kind="TrashCan" Width="20" Height="20" />
+                <Button.ToolTip>
+                    <ToolTip Content="Remove playlists"/>
+                </Button.ToolTip>
+            </Button>
+
+            <ProgressBar x:Name="TrackProgress" HorizontalAlignment="Left" Height="11" Margin="112,337,0,0" VerticalAlignment="Top" Width="194" MouseDown="TrackProgress_MouseDown"/>
+            <MediaElement HorizontalAlignment="Left" Height="155" Margin="90,97,0,0" VerticalAlignment="Top" Width="162"/>
+        </Grid>
+    </Grid>
+</Window>
